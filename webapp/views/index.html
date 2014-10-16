@@ -1,0 +1,43 @@
+<html>
+	<head id='test'>
+		<title data-bind="text:title"></title>
+	</head>
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+	<!-- Template Area -->
+	<script type="text/html" id="blog_list_tmpl">
+		<article class="post">
+			<header>
+				<p class="catogry" data-bind="text:category"></p>
+				<h1><a data-bind="text:title,attr:{ href: title, title: title }"></a></h1>
+				<p class="post-time" data-bind="text:date"></p>
+			</header>
+			<p class="post-desc" data-bind="text:content">
+			
+			</p>
+		</article>
+	    
+	</script>
+	<!-- Template Area End-->
+	<body>
+		<header class="header" id="header_bind">
+			<div class="button-wrap fl">
+				<div class="buttons button-menu" data-bind="click:openMenu()"><i class="fa fa-bars"></i></div>
+				<div class="buttons button-search" data-bind="click:openSearch()"><i class="fa fa-search"></i></div>
+			</div>
+			<div class="blog-name fr" data-bind="click:popHanson()"><span>Hanson's</span></div>
+			
+		</header> 
+		<div class="main-content"  id="bloglist">
+			<div class="bloglist-wrap" data-bind="template: { name: 'blog_list_tmpl', foreach: data }">
+				
+			</div>
+			
+		</div>
+		<footer class="footer"></footer>
+		<script type="text/javascript" src="script/libs/jquery-1.8.0.min.js"></script>
+		<script type="text/javascript" src="script/libs/knockout-3.1.0.js"></script>
+		<script type="text/javascript" src="script/libs/knockout.mapping.js"></script>
+		<script type="text/javascript" src="script/service/index.js"></script>
+	</body>
+</html>

@@ -1,0 +1,17 @@
+{
+	"flag":true,
+	"msg":"All users are exported !",
+	"data":[
+		{
+			"name":"Hanson",
+			"age":"25",
+			"sports":"any",
+			"status":"work"
+		},{
+			"name":"David",
+			"age":"23",
+			"sports":"basketball",
+			"status":"student"
+		}
+	]
+}
