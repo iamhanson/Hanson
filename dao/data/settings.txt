@@ -1,3 +1,0 @@
-{
-	"title":"Hanson's Blog"
-}
