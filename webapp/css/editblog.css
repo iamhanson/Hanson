@@ -1,0 +1,31 @@
+.bloglist-wrap table{
+	margin-top: 30px;
+	width: 600px;
+	border-left: 1px #ccc solid;
+	border-bottom: 1px #ccc solid;
+}
+.bloglist-wrap table td,.bloglist-wrap table th{
+	border-right: 1px #ccc solid;
+	border-top: 1px #ccc solid;
+	text-indent: 10px;
+	line-height: 25px;
+	font-size: 12px;
+}
+.blog-select{
+	width: 70px;
+}
+.blog-name{
+	width: 300px;
+}
+.blog-date{
+	overflow: hidden;
+	width: 100px;
+
+}
+.blog-operate{
+	width: 130px;
+}
+.blog-operate a{
+	padding-left: 10px;
+	padding-right: 10px;
+}

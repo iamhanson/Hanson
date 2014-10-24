@@ -1,5 +1,3 @@
-//首页
-var indexR=require('./index');
 //博客
 var blogR=require('./blog');
 // var markdown = require( "markdown-js" );
@@ -7,13 +5,12 @@ var blogR=require('./blog');
 module.exports = function (app) {
     //首页
     app.get('/', function (req, res) {
-        //console.log( markdown.toHTML( "Hello *World*!" ) );
         res.render('index');
-
     });
-    //设置
+
+    //获取页面配置
     app.post('/settings', function (req, res) {
-        var getSettings=require('../dao/settings');
+        var getSettings=require('../service/controller/config');
         getSettings.settings(function(data){
             res.send(data);
         });
@@ -23,6 +20,33 @@ module.exports = function (app) {
         blogR.getBlogList(req,res);
     });
 
+    //获取博客详细
+    app.get('/blogs/:id',function(req,res){
+        blogR.getBlogDetail(req,res);
+    });
+
+    app.get('/admin',function(req,res){
+        res.render('admin');
+    });
+    app.get('/createblog',function(req,res){
+        res.render('createblog');
+    });
+    app.get('/editblog',function(req,res){
+        res.render('editblog');
+    });
+
+    app.post('/sendblog',function(req,res){
+        blogR.sendBlog(req,res);
+    });
+    app.post('/deleteblog',function(req,res){
+        blogR.deleteBlog(req,res);
+    });
+    
+    //获取博客详细
+    app.post('/blogs',function(req,res){
+        blogR.getBlogDetailPost(req,res);
+    });
+
     //关于信息
     app.get('/about', function (req, res) {  
         res.send('Hello about');
@@ -30,7 +54,7 @@ module.exports = function (app) {
 
     //获取用户信息
     app.post('/users',function(req,res){
-    	var getUsers=require('../dao/readfile.js');
+    	var getUsers=require('../service/readfile.js');
     	var backData=getUsers.getUser(__dirname,function(data){
     		res.send(req.body.who+":"+data);
     	});
@@ -38,16 +62,14 @@ module.exports = function (app) {
 
     //获取用户信息
     app.get('/users/:who?',function(req,res){
-    	var getUsers=require('../dao/readfile.js');
+    	var getUsers=require('../service/readfile.js');
     	var backData=getUsers.getUser(__dirname,function(data){
     		res.send(req.params.who+":"+data);
     	});
     });
 
-    app.get("/hello/:who", function(req, res) {
-	  res.end("Hello, " + req.params.who + ".");
-	});
+    //404页面
     app.get('*', function (req, res) {  
-        res.send('Hello 404');
+        res.render('404');
     });
 };

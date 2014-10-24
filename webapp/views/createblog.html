@@ -1,0 +1,39 @@
+<html>
+<head>
+	<title>内容发布|Hanson's Blog</title>
+	<link rel="stylesheet" type="text/css" href="css/common.css">
+	<link rel="stylesheet" type="text/css" href="css/createblog.css">
+	<link rel="stylesheet" type="text/css" href="/css/markdown.css">
+</head>
+<body id="blog_edit">
+	<div class="content-main">
+		<div class="edit-wrap">
+			<div class="edit-item">
+				<input class="blog-title" data-bind="value:title" name="title" id="blog_title" placeholder="在此输入博客标题" />
+			</div>
+			<div class="edit-item">
+				<select data-bind="options: category, selectedOptions: selectedCategory" >
+					
+				</select>
+			</div>
+			<div class="edit-item">
+				<input class="blog-title" data-bind="value:tags" name="title" id="blog_title" placeholder="在此输入博客标签" />
+			</div>
+			<div class="edit-item">
+				<textarea  data-bind="visible:!preview(),value:detail" class="blog-content edit-content" id="blogcontent" placeholder="在此输入博客内容"></textarea>
+				<p class="blog-content preview md-content" data-bind="visible:preview(),html:detailPreview">此处预览</p>
+			</div>
+			<div class="edit-item opreate-button">
+				<button data-bind="click:publishBlog(),visible:!preview()">发布</button>
+				<button data-bind="click:previewBlog(),text:previewText">预览</button>
+			</div>
+		</div>
+	</div>
+</body>
+	<script type="text/javascript" src="script/libs/jquery-1.8.0.min.js"></script>
+	<script type="text/javascript" src="script/libs/jquery.tmpl.js"></script>
+	<script type="text/javascript" src="script/libs/knockout-3.1.0.js"></script>
+	<script type="text/javascript" src="script/libs/knockout.mapping.js"></script>
+	<script type="text/javascript" src="script/libs/marked/marked.js"></script>
+	<script type="text/javascript" src="script/service/create.js"></script>
+</html>

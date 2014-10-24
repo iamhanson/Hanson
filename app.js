@@ -3,7 +3,7 @@ var m_querystring = require('querystring');
 var url = require("url");
 var express=require("express");
 var ejs=require("ejs");
-
+var favicon = require('serve-favicon');
 /*
 *get请求获取参数示例(GET PARAM FROM GET)
 *request 请求
@@ -40,6 +40,8 @@ exports.run = function (port) {
     app.use('/script', express.static(__dirname+'/webapp/script'));
     app.use('/css', express.static(__dirname+'/webapp/css'));
     app.use('/fonts', express.static(__dirname+'/webapp/fonts'));
+    app.use('/image', express.static(__dirname+'/webapp/image'));
+    app.use(favicon(__dirname + '/webapp/image/fav.ico'));
     app.use(require('body-parser').urlencoded({extended: true}));//post请求的参数获取
 	var routes = require('./routes/routes')(app);  
 	app.listen(port); 

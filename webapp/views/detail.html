@@ -1,0 +1,77 @@
+<html>
+	<head id='test'>
+		<title><%= data.title %> | Hanson's Blog</title>
+	</head>
+	<link rel="stylesheet" type="text/css" href="/css/common.css">
+	<link rel="stylesheet" type="text/css" href="/css/detail.css">
+	<link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/markdown.css">
+	<body>
+		<header class="header" id="header_bind">
+			<div class="button-wrap fl">
+				<div class="buttons button-menu"><a href="../"><i class="fa fa-home"></i></a></div>
+				<div class="buttons button-menu" data-bind="click:openMenu()"><i class="fa fa-bars"></i></div>
+				<div class="buttons button-search" data-bind="click:openSearch()"><i class="fa fa-search"></i></div>
+			</div>
+			<div class="blog-name fr" data-bind="click:popHanson()"><span>Hanson's</span></div>
+			
+		</header> 
+		<div class="main-content"  id="blogcontent">
+			<div class="blog-wrap">
+				<article class="post">
+				<header>
+					<h1><%= data.title %></h1>
+
+					<p class="catogry">
+					<% for(var i=0; i<data.category.length; i++) {%>
+					   <i class="fa fa-pie-chart"></i><span><%= data.category[i] %></span>
+					<% } %>
+					</p>
+					<p class="post-time"><i class="fa fa-calendar"></i><span><%= data.date %></span></p>
+				</header>
+				<div class="post-desc md-content"><%- data.detail %></div>
+				<p class="tags">
+					<% for(var i=0; i<data.tags.length; i++) {%>
+					   <i class="fa fa-tag"></i><span><%= data.tags[i] %></span>
+					<% } %>
+					</p>
+			</article>
+			</div>
+		</div>
+
+		<div class="duoshuo-comment">
+			<!-- 多说评论框 start -->
+			<div class="ds-thread" data-thread-key="<%= data.id %>" data-title="<%= data.title %>" data-url="http://hanson.yixuezi.com/blogs/<%= data.id %>"></div>
+		</div>
+		
+		<!-- 多说评论框 end -->
+		<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+		<script type="text/javascript">
+			var duoshuoQuery = {short_name:"hanson"};
+			(function() {
+				var ds = document.createElement('script');
+				ds.type = 'text/javascript';ds.async = true;
+				ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+				ds.charset = 'UTF-8';
+				(document.getElementsByTagName('head')[0] 
+				 || document.getElementsByTagName('body')[0]).appendChild(ds);
+			})();
+		</script>
+		<!-- 多说公共JS代码 end -->
+		<footer class="footer">
+			<p>Powered By NodeJs</p>
+			<p>© Hanson's Blog 2014 GIT @<a href="https://github.com/iamhanson/Hanson" target="_blank">github.com/iamhanson/Hanson</a></p>
+		</footer>
+		
+		<script type="text/javascript" src="/script/libs/jquery-1.8.0.min.js"></script>
+		<script type="text/javascript" src="/script/libs/higlight/shCore.js"></script>
+		<script type="text/javascript" src="/script/libs/higlight/shBrushJScript.js"></script>
+		<link type="text/css" rel="stylesheet" href="/script/libs/higlight/shCoreDefault.css"/>
+		<script type="text/javascript">
+			 $(function(){
+		        SyntaxHighlighter.all();
+		    })
+		</script>
+		
+	</body>
+</html>

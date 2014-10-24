@@ -1,7 +1,8 @@
 <html>
-	<head id='test'>
-		<title data-bind="text:title"></title>
+	<head>
+		<title>Hanson's Blog</title>
 	</head>
+	<link rel="stylesheet" type="text/css" href="css/common.css">
 	<link rel="stylesheet" type="text/css" href="css/index.css">
 	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
 	<!-- Template Area -->
@@ -9,33 +10,40 @@
 		<article class="post">
 			<header>
 				<p class="catogry" data-bind="text:category"></p>
-				<h1><a data-bind="text:title,attr:{ href: title, title: title }"></a></h1>
+				<h1><a target="_blank" href="/blogs/${id}">${title}</a></h1>
 				<p class="post-time" data-bind="text:date"></p>
 			</header>
-			<p class="post-desc" data-bind="text:content">
-			
-			</p>
+			<p class="post-desc" data-bind="text:blogDesc"></p>
 		</article>
-	    
 	</script>
 	<!-- Template Area End-->
-	<body>
+	<body id="blog_index">
+		<!--顶部-->
 		<header class="header" id="header_bind">
 			<div class="button-wrap fl">
 				<div class="buttons button-menu" data-bind="click:openMenu()"><i class="fa fa-bars"></i></div>
-				<div class="buttons button-search" data-bind="click:openSearch()"><i class="fa fa-search"></i></div>
+				<div class="buttons menu-wrap">
+					<ul class="button-menu-item" id="menu" data-bind="foreach:category">
+					<li><a data-bind="text:$data,click:$parent.selectMenu($data)"></a></li>
+					
+				</ul>
+				</div>
+				<div class="buttons button-search" data-bind=""><i class="fa fa-search"></i></div>
 			</div>
-			<div class="blog-name fr" data-bind="click:popHanson()"><span>Hanson's</span></div>
+			<div class="blog-name fr" data-bind="click:about()"><span>Hanson's</span></div>
 			
 		</header> 
+		<!--博客的列表-->
 		<div class="main-content"  id="bloglist">
-			<div class="bloglist-wrap" data-bind="template: { name: 'blog_list_tmpl', foreach: data }">
-				
-			</div>
-			
+			<div class="bloglist-wrap" data-bind="template: { name: 'blog_list_tmpl', foreach: data }"></div>
 		</div>
-		<footer class="footer"></footer>
+		<!--博客的列表结束-->
+		<footer class="footer">
+			<p>Powered By NodeJs</p>
+			<p>© Hanson's Blog 2014 GIT @<a href="https://github.com/iamhanson/Hanson" target="_blank">github.com/iamhanson/Hanson</a></p>
+		</footer>
 		<script type="text/javascript" src="script/libs/jquery-1.8.0.min.js"></script>
+		<script type="text/javascript" src="script/libs/jquery.tmpl.js"></script>
 		<script type="text/javascript" src="script/libs/knockout-3.1.0.js"></script>
 		<script type="text/javascript" src="script/libs/knockout.mapping.js"></script>
 		<script type="text/javascript" src="script/service/index.js"></script>
