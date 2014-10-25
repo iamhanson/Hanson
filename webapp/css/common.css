@@ -35,10 +35,12 @@ body{
 	cursor: pointer;
 }
 .header{
-	width: 100%;
+	position: fixed;
+	top: 0px;
+	left: 0px;
 	height: 60px;	
 	background: #fff;
-	
+	z-index: 11;
 }
 .button-wrap{
 	display: table;
@@ -51,48 +53,70 @@ body{
 	height: 100%;
 	text-align: left;
 	vertical-align:middle;
-	border-right:solid #ccc 1px;
-	border-bottom: solid #ccc 1px;
-	
-}
-.buttons i{
-	cursor: pointer;
-	color: #666666;
-}
-.buttons i:hover{
-	color: #000000;
+	border-right:solid #C6D0DA 1px;
+	border-bottom: solid #C6D0DA 1px;
 	font-weight: bold;
-}
-.bloglist-wrap{
-	margin: 0 auto;
-	width: 960px;
-}
-.hiden-menu{
-	display: none;
-}
-.menu-wrap{
-	overflow: hidden;
-	padding: 0px;
-	width: 0px;
+	cursor: pointer;
+	color: #5F6F81;
 }
 
-.button-menu-item{
-	height: 100%;
-	width: auto;
+.buttons:hover{
+	color: #ffffff;
+	background: #5F6F81;
 }
-.button-menu-item li{
-	display: table;
-	float: left;
-	padding-right: 20px;
-	padding-left: 20px;
-	border-right:solid #ccc 1px;
+.bloglist-wrap,.blog-wrap{
+	margin: 0 auto;
+	width: 70%;
+	max-width: 800px;
+}
+
+.slide-menu{
+	position: fixed;
+	overflow: hidden;
+	z-index: 10;
+	left: -201px;
+	top: 0px;
+	width: 200px;
 	height: 100%;
+	background: #ffffff;
+	border-right:solid #C6D0DA 1px;
+}
+.operate-menu li{
+	height: 45px;
+	width: 100%;
+	border-bottom: solid #C6D0DA 1px;
+	line-height: 45px;
 	list-style: none;
 	cursor: pointer;
-	color: #666666;
+	color: #5F6F81;
+	font-weight: bold;
+	font-family: "微软雅黑";
+}
+.operate-menu li:hover{
+	background: #f2f2f2;
+	color:#000000;
+}
+.operate-menu li i{
+	min-width: 20px;
+	padding-right: 10px;
+	padding-left: 15px;
+}
+
+.button-menu-item li{
+	padding-left: 30px;
+	height: 45px;
+	width: 100%;
+	line-height: 45px;
+	list-style: none;
+	cursor: pointer;
+	color: #999;
+	font-weight: bold;
+	border-bottom: solid #C6D0DA 1px;
 }
 .button-menu-item li:hover{
+	background: #f2f2f2;
 	color:#000000;
+
 }
 .button-menu-item .fa{
 	margin-right: 5px;
@@ -103,6 +127,42 @@ body{
 .button-menu-item li a,.button-menu-item li i{
 	display: table-cell;
 	vertical-align: middle;
+}
+p.home-button{
+	height: 60px;
+	border-bottom: solid #C6D0DA 1px;
+	line-height: 60px;
+	font-weight: bold;
+	color: #5F6F81;
+	cursor: pointer;
+}
+p.home-button i{
+	min-width: 20px;
+	padding-right: 10px;
+	padding-left: 15px;
+}
+/*滑动菜单结束*/
+
+.main-content{
+	position: relative;
+	padding-top: 70px;
+	z-index: 0;
+}
+.main-slide{
+	
+}
+.body-oh{
+	overflow: hidden;
+}
+.pop-cover{
+	display: none;
+	position: fixed;
+	top:0px;
+	z-index: 1;
+	width: 100%;
+	height: 100%;
+	background: #000;
+	opacity: 0.5;
 }
 
 .footer{
@@ -122,4 +182,11 @@ body{
 }
 .post i{
 	margin-right: 5px;
+}
+
+/*animations*/
+@-webkit-keyframes main-slide /* Safari 和 Chrome */
+{
+from {left: 0px;}
+to {left: 100px;}
 }

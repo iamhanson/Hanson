@@ -121,7 +121,7 @@ var _updateBlogDB=function(sendData,callBack){
 			}
 		});
 		if(!existFlag){
-			blogDB.blogList.push(sendData);
+			blogDB.blogList.unshift(sendData);
 			fs.writeFile('./service/data/blog.db.js',JSON.stringify(blogDB),"utf8",function(err){
 				if(err){
 					console.log(err);

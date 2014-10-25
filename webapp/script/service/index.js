@@ -4,25 +4,12 @@
 * 2014-10-1
 */
 var indexDo={
-
 	/*
 	* 首页的viewModel
 	*/
 	indexModel:function(){
 		var self=this;
-		self.title=ko.observable("");
-		self.category=ko.observableArray();
-		self.data=ko.observableArray();
-		self.about=function(){
-			return function(){
-				alert("I am Hanson")
-			};
-		};
-		self.openMenu=function(){
-			return function(){
-				var originWidth=$("#menu").outerWidth();
-			};
-		};
+		new headModel(self);
 		indexDo.getSiteSetting(function(data){
 			ko.mapping.fromJS(data, {}, self); 
 		});

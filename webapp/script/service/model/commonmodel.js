@@ -1,0 +1,41 @@
+/*
+* 顶部公用的ko model
+* @param self 初始化的model自身
+*/
+var headModel = function(self){
+	self.title=ko.observable("");
+	self.category=ko.observableArray();
+	self.data=ko.observableArray();
+	self.backHome=function(){
+		return function(){
+			window.location.href="/";
+		};
+	};
+	self.about=function(){
+		return function(){
+			alert("I am Hanson,success");
+		};
+	};
+	self.openMenu=function(){
+		return function(){
+			if($("#slide_menu").hasClass("slide-menu-on")){
+				$("#slide_menu").removeClass("slide-menu-on");
+				$(".pop-cover").fadeOut();
+				$(".main-content,#header_bind").stop().animate({"left":"0px"});
+				$("#slide_menu").stop().animate({"left":"-201px"},function(){
+					$("body").removeClass("body-oh");
+				});
+			}else{
+				$("#slide_menu").addClass("slide-menu-on");
+				$(".pop-cover").unbind();
+				$(".pop-cover").one("click",function(){
+					$("#menu_button").trigger("click")
+				});
+				$("body").addClass("body-oh")
+				$(".pop-cover").fadeIn();
+				$(".main-content,#header_bind").stop().animate({"left":"201px"});
+				$("#slide_menu").stop().animate({"left":"0px"});
+			}
+		};
+	};
+};

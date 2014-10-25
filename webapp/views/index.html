@@ -18,23 +18,27 @@
 	</script>
 	<!-- Template Area End-->
 	<body id="blog_index">
+		<div class="pop-cover"></div>
+		<div class="slide-menu" id="slide_menu">
+			<p class="home-button" data-bind="click:backHome()"><i class="fa fa-home"></i>Blog's Home</p>
+			<ul class="operate-menu" id="menu">
+				<li><i class="fa fa-bar-chart"></i><a >内容分类</a></li>
+				<li><i class="fa fa-tag"></i><a>文章分类</a></li>
+				<li><i class="fa fa-exclamation-circle"></i><a >关于 Hanson</a></li>
+			</ul>
+			<ul class="button-menu-item" id="menu" data-bind="foreach:category,visible:false">
+				<li><a data-bind="text:$data,click:$parent.selectMenu($data)"></a></li>
+			</ul>
+		</div>
 		<!--顶部-->
 		<header class="header" id="header_bind">
 			<div class="button-wrap fl">
-				<div class="buttons button-menu" data-bind="click:openMenu()"><i class="fa fa-bars"></i></div>
-				<div class="buttons menu-wrap">
-					<ul class="button-menu-item" id="menu" data-bind="foreach:category">
-					<li><a data-bind="text:$data,click:$parent.selectMenu($data)"></a></li>
-					
-				</ul>
-				</div>
-				<div class="buttons button-search" data-bind=""><i class="fa fa-search"></i></div>
+				<div class="buttons button-menu" id="menu_button" data-bind="click:openMenu()"><i class="fa fa-bars"></i></div>
+				<div class="buttons button-search" onclick="window.location.href='./'">Hanson's Blog</div>
 			</div>
-			<div class="blog-name fr" data-bind="click:about()"><span>Hanson's</span></div>
-			
 		</header> 
 		<!--博客的列表-->
-		<div class="main-content"  id="bloglist">
+		<div class="main-content main-slide"  id="bloglist">
 			<div class="bloglist-wrap" data-bind="template: { name: 'blog_list_tmpl', foreach: data }"></div>
 		</div>
 		<!--博客的列表结束-->
@@ -46,6 +50,7 @@
 		<script type="text/javascript" src="script/libs/jquery.tmpl.js"></script>
 		<script type="text/javascript" src="script/libs/knockout-3.1.0.js"></script>
 		<script type="text/javascript" src="script/libs/knockout.mapping.js"></script>
+		<script type="text/javascript" src="/script/service/model/commonmodel.js"></script>
 		<script type="text/javascript" src="script/service/index.js"></script>
 	</body>
 </html>
