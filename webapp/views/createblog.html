@@ -1,18 +1,19 @@
 <html>
 <head>
 	<title>内容发布|Hanson's Blog</title>
-	<link rel="stylesheet" type="text/css" href="css/common.css">
-	<link rel="stylesheet" type="text/css" href="css/createblog.css">
+	<link rel="stylesheet" type="text/css" href="/css/common.css">
+	<link rel="stylesheet" type="text/css" href="/css/createblog.css">
 	<link rel="stylesheet" type="text/css" href="/css/markdown.css">
 </head>
 <body id="blog_edit">
+	<input type="hidden" value="<% if(blogid) { %><%= blogid %><% } %>" id="has_id" />
 	<div class="content-main">
 		<div class="edit-wrap">
 			<div class="edit-item">
 				<input class="blog-title" data-bind="value:title" name="title" id="blog_title" placeholder="在此输入博客标题" />
 			</div>
 			<div class="edit-item">
-				<select data-bind="options: category, selectedOptions: selectedCategory" >
+				<select data-bind="options: blogCategory, selectedOptions: category" >
 					
 				</select>
 			</div>
@@ -30,10 +31,10 @@
 		</div>
 	</div>
 </body>
-	<script type="text/javascript" src="script/libs/jquery-1.8.0.min.js"></script>
-	<script type="text/javascript" src="script/libs/jquery.tmpl.js"></script>
-	<script type="text/javascript" src="script/libs/knockout-3.1.0.js"></script>
-	<script type="text/javascript" src="script/libs/knockout.mapping.js"></script>
-	<script type="text/javascript" src="script/libs/marked/marked.js"></script>
-	<script type="text/javascript" src="script/service/create.js"></script>
+	<script type="text/javascript" src="/script/libs/jquery-1.8.0.min.js"></script>
+	<script type="text/javascript" src="/script/libs/jquery.tmpl.js"></script>
+	<script type="text/javascript" src="/script/libs/knockout-3.1.0.js"></script>
+	<script type="text/javascript" src="/script/libs/knockout.mapping.js"></script>
+	<script type="text/javascript" src="/script/libs/marked/marked.js"></script>
+	<script type="text/javascript" src="/script/service/create.js"></script>
 </html>

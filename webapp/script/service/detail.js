@@ -11,11 +11,14 @@ var detaiDo={
 	detailModel:function(){
 		var self=this;
 		new headModel(self);
-		self.selectMenu=function(obj){
+		detaiDo.getSiteSetting(function(data){
+			ko.mapping.fromJS(data, {}, self); 
+		});
+
+		self.selectMenu=function(category){
 			return function(){
-				detaiDo.getBlogList(obj,function(data){
-					ko.mapping.fromJS(data, {}, self); 
-				});
+				sessionStorage.setItem("category",category);
+				window.location.href="../../";
 			}
 		};
 	},

@@ -9,9 +9,12 @@ var indexDo={
 	*/
 	indexModel:function(){
 		var self=this;
+		//引入公用的模板
 		new headModel(self);
+		self.loading=ko.observable(true);
 		indexDo.getSiteSetting(function(data){
 			ko.mapping.fromJS(data, {}, self); 
+			self.loading(false);
 		});
 		indexDo.getBlogList("",function(data){
 			ko.mapping.fromJS(data, {}, self); 
@@ -21,6 +24,7 @@ var indexDo={
 				indexDo.getBlogList(obj,function(data){
 					ko.mapping.fromJS(data, {}, self); 
 				});
+				$("#menu_button").trigger("click");
 			}
 		};
 	},
@@ -49,6 +53,10 @@ var indexDo={
 	* @param callBack 获取数据后的回调函数
 	*/
 	getBlogList:function(category,callBack){
+		if(!category){
+			category=sessionStorage.getItem("category")||"";
+			sessionStorage.removeItem("category");
+		}
 		$.ajax({
 			url:"/list",
 			type:"post",

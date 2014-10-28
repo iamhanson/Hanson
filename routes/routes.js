@@ -24,20 +24,27 @@ module.exports = function (app) {
     app.get('/blogs/:id',function(req,res){
         blogR.getBlogDetail(req,res);
     });
+    //获取博客详细
+    app.post('/blogs/:id',function(req,res){
+        blogR.getBlogDetail(req,res);
+    });
 
     app.get('/admin',function(req,res){
         res.render('admin');
     });
-    app.get('/createblog',function(req,res){
-        res.render('createblog');
+    app.get('/createblog/:id?',function(req,res){
+        res.render('createblog',{"blogid":req.params.id});
     });
     app.get('/editblog',function(req,res){
         res.render('editblog');
     });
 
-    app.post('/sendblog',function(req,res){
+    //发送博客内容，如果存在ID，则表示是编辑
+    app.post('/sendblog/:id?',function(req,res){
         blogR.sendBlog(req,res);
     });
+
+    //删除博客
     app.post('/deleteblog',function(req,res){
         blogR.deleteBlog(req,res);
     });

@@ -92,6 +92,10 @@ body{
 	font-weight: bold;
 	font-family: "微软雅黑";
 }
+
+.category-list li:last-child{
+	border-bottom: none;
+}
 .operate-menu li:hover{
 	background: #f2f2f2;
 	color:#000000;
@@ -127,6 +131,25 @@ body{
 .button-menu-item li a,.button-menu-item li i{
 	display: table-cell;
 	vertical-align: middle;
+}
+
+.operate-menu li.hide-item{
+	overflow: hidden;
+	height: auto;
+}
+.category-list{
+	
+}
+.category-list li{
+	height: 0px;
+	padding-left: 30px;
+	float: left;
+	background: #ffffff;
+	font-weight: 300;
+}
+.operate-menu .category-list li i{
+	padding-right: 5px;
+	min-width: 15px;
 }
 p.home-button{
 	height: 60px;
@@ -182,6 +205,23 @@ p.home-button i{
 }
 .post i{
 	margin-right: 5px;
+}
+.bloglist-nodata{
+	min-height: 300px;
+	line-height: 300px;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 1.5em;
+}
+.load-tip{
+	min-height: 300px;
+	vertical-align: middle;
+	font-size: 2em;
+	text-align: center;
+	line-height: 300px;
+}
+.bloglist-nodata i{
+	padding-right: 10px;
 }
 
 /*animations*/

@@ -110,27 +110,32 @@ var _updateBlogDB=function(sendData,callBack){
 			callBack(new blogModel.resultModel(false,err,[],0));
 			return;
 		}
-		//json
 		var blogDB=eval("("+data+")");
 		var existFlag=false;
+		var listCount=blogDB.blogList.length;
 		blogDB.blogList.forEach(function(item){
 			if(item.id==sendData.id){
 				existFlag=true;
-				callBack(new blogModel.resultModel(false,"有相同的文章ID",[],0));
+				item.title=sendData.title;
+				item.date=sendData.date;
+				item.blogDesc=sendData.blogDesc;
+				item.category=sendData.category;
+				item.tags=sendData.tags;
+				item.blogFilePath=sendData.blogFilePath;
 				return;
 			}
 		});
 		if(!existFlag){
-			blogDB.blogList.unshift(sendData);
-			fs.writeFile('./service/data/blog.db.js',JSON.stringify(blogDB),"utf8",function(err){
-				if(err){
-					console.log(err);
-					callBack(new blogModel.resultModel(false,err,[],0));
-					return;
-				}
-				callBack(new blogModel.resultModel(true,"bloglist add successful.",[],0));
-			});
+			blogDB.blogList.unshift(sendData);	
 		}
+		fs.writeFile('./service/data/blog.db.js',JSON.stringify(blogDB),"utf8",function(err){
+			if(err){
+				console.log(err);
+				callBack(existFlag,new blogModel.resultModel(false,err,[],0));
+				return;
+			}
+			callBack(existFlag,new blogModel.resultModel(true,"bloglist add successful.",[],0));
+		});
 	});
 };
 
@@ -168,8 +173,8 @@ var _deleteBlogFromList=function(index,callBack){
 			callBack(data);
 		});
 	});
-	//
 };
+
 /*
 * 删除博客
 * @param sendData 发送的数据
@@ -220,11 +225,11 @@ exports.deleteBlogHandler=function(id,callBack){
 * @param sendData 发送的数据
 * @param callBack 处理完成后的回调
 */
-exports.saveBlogHandler=function(sendData,callBack){
+exports.createBlogHandler=function(sendData,callBack){
 	//初始化工具集
 	var toolCore=new tools.tool();
 	var filePath=toolCore.getDate("yymm");
-	var fileName=new Date().getTime();
+	var fileName=sendData.id||new Date().getTime();
 	var listData=new blogModel.saveBlogInfo(fileName,sendData.title,
 				toolCore.getDate("full"),
 				sendData.detail.substring(0,100),
@@ -234,7 +239,7 @@ exports.saveBlogHandler=function(sendData,callBack){
 	//检查年月文件夹是否存在，如果不存在，则新建
 	fs.exists("./blogs/"+filePath,function(exists){
 		if(exists){
-			_updateBlogDB(listData,function(result){
+			_updateBlogDB(listData,function(existFlag,result){
 				if(result.flag){
 					_saveBlog("./blogs/"+filePath+"/"+fileName+".md",sendData.detail,function(data){
 						callBack(data);
@@ -250,7 +255,7 @@ exports.saveBlogHandler=function(sendData,callBack){
 					callBack(new blogModel.resultModel(false,err,[],0));
 					return;
 				}
-				_updateBlogDB(listData,function(result){
+				_updateBlogDB(listData,function(existFlag,result){
 					if(result.flag){
 						_saveBlog("./blogs/"+filePath+"/"+fileName+".md",sendData.detail,function(data){
 							callBack(data);
@@ -289,6 +294,10 @@ exports.blogList=function(category,callBack){
 * @param callBack 数据获取OK之后的回调
 */
 exports.blogDetailInfo=function(blogId,callBack){
+	if(!blogId||blogId==""){
+		callBack([]);
+		return;
+	}
 	fs.readFile('./service/data/blog.db.js', 'utf8',function (err,data) {
 		if (err) {
 			callBack(new blogModel.resultModel(false,err,[],0));
