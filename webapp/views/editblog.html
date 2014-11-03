@@ -8,22 +8,14 @@
 <!-- Template Area -->
 <script type="text/html" id="blog_list_tmpl">
 	<tr>
-		<td class="blog-select"><input type="checkbox" value="${id}" /></td>
-		<td class="blog-name ell">${title}</td>
-		<td class="blog-date ell">${date}</td>
+		<td class="blog-select"><input type="checkbox" data-bind="value:id" /></td>
+		<td class="blog-name ell"><a data-bind="text:title,attr:{href:'blogs/'+id()}" target="_blank"></a></td>
+		<td class="blog-date ell" data-bind="text:date"></td>
 		<td class="blog-operate">
-			<a href="./createblog/${id}">编辑</a>
-			<a href="javascript:void(0)" data-bind="click:$parent.deleteBlog(id())">删除</a>
+			<a data-bind="attr:{href:'./createblog/'+id()}">编辑</a>
+			<a href="javascript:void(0)" data-bind="click:deleteBlog(id())">删除</a>
 		</td>
 	</tr>
-	<article class="post">
-		<header>
-			<p class="catogry" data-bind="text:category"></p>
-			<h1><a target="_blank" href="/blogs/${id}">${title}</a></h1>
-			<p class="post-time" data-bind="text:date"></p>
-		</header>
-		<p class="post-desc" data-bind="text:blogDesc"></p>
-	</article>
 </script>
 <!-- Template Area End-->
 <body id="blog_edit">
@@ -43,9 +35,15 @@
 	</div>
 	</div>
 </body>
-	<script type="text/javascript" src="/script/libs/jquery-1.8.0.min.js"></script>
-	<script type="text/javascript" src="/script/libs/jquery.tmpl.js"></script>
-	<script type="text/javascript" src="/script/libs/knockout-3.1.0.js"></script>
-	<script type="text/javascript" src="/script/libs/knockout.mapping.js"></script>
-	<script type="text/javascript" src="script/service/edit.js"></script>
+<script src="/script/lib/require.js"  data-main="script/framework/config"></script>
+<script type="text/javascript">
+	require(['/script/framework/ui/edit.js'],function(edit){
+		edit.load();
+	});
+</script>
+	<!--<script type="text/javascript" src="/script/lib/jquery-1.8.0.min.js"></script>
+	<script type="text/javascript" src="/script/plugin/jquery.tmpl.js"></script>
+	<script type="text/javascript" src="/script/lib/knockout-3.1.0.js"></script>
+	<script type="text/javascript" src="/script/lib/knockout.mapping.js"></script>
+	<script type="text/javascript" src="script/framework/edit.js"></script>-->
 </html>

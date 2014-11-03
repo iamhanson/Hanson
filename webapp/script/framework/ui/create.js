@@ -1,6 +1,7 @@
-var edit={
-	//发送文本内容
-	_sendContent:function(category,tags,title,content,callBack){
+define(['jquery','knockout','komapping','marked'],function($,ko,komapping,marked){
+	ko.mapping = komapping;
+		//发送文本内容
+	var _sendContent=function(category,tags,title,content,callBack){
 		$.ajax({
 			url:"/sendblog",
 			type:"post",
@@ -19,17 +20,18 @@ var edit={
 				//
 			}
 		});
-	},
+	};
+	
 	/*
 	* 获取存在的博客进行编辑
 	* @param blogId博客id
 	* @param callBack 回调
 	*/
-	_getExistBlog:function(blogId,callBack){
+	var _getExistBlog=function(blogId,callBack){
 		$.ajax({
 			url:"/blogs",
 			type:"post",
-			data:{id:blogId+""},
+			data:{id:blogId+"",origin:true},
 			dataType:"json",
 			success:function(data){
 				if(data.flag){
@@ -39,21 +41,23 @@ var edit={
 				}
 			},
 			error:function(a,b,c){
-				debugger
+				//debugger
 			}
 		});
-	},
-	editModel:function(){
+	};
+	var _editModel=function(){
 		var self=this;
 		self.preview=ko.observable(false);
 		self.previewText=ko.observable("预览");
 		self.title=ko.observable("");
 		self.detail=ko.observable("");
+		//订阅改动事件
+		//self.detail.subscribe(function(newValue){alert("Changed: "+newValue);});
 		self.blogCategory=ko.observableArray(["JavaScript","Css","html5","css3","NodeJs","Hanson"]);
 		self.category=ko.observableArray(["JavaScript"]);
 		self.tags=ko.observableArray("");
 		self.detailPreview=ko.observable("");
-		edit._getExistBlog($("#has_id").val(),function(data){
+		_getExistBlog($("#has_id").val(),function(data){
 			ko.mapping.fromJS(data, {}, self); 
 		});
 		//预览博客
@@ -78,13 +82,13 @@ var edit={
 				}else{
 					tags=self.tags().split(",");
 				}
-				if(self.selectedCategory().join(",").length>0&&self.tags().length>0&&self.title().length>0&&self.detail().length>0){
+				if(self.category().join(",").length>0&&self.tags().length>0&&self.title().length>0&&self.detail().length>0){
 					
 				}else{
 					alert("不能为空");
 					return;
 				};
-				edit._sendContent(self.selectedCategory(),tags,self.title(),self.detail(),function(data){
+				_sendContent(self.category(),tags,self.title(),self.detail(),function(data){
 					self.preview(true);
 					if(data.flag){
 						self.detailPreview(data.data);
@@ -93,11 +97,11 @@ var edit={
 						alert(data.msg);
 					}
 				});
-				
 			};
 		};
+	};
+
+	return {
+		load:function(){ko.applyBindings(new _editModel(),document.getElementById("blog_edit"));}
 	}
-};
-$(function(){
-	ko.applyBindings(new edit.editModel(),document.getElementById("blog_edit"));
 });

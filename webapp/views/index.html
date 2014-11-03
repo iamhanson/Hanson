@@ -10,14 +10,18 @@
 		<article class="post">
 			<header>
 				<p class="catogry" data-bind="text:category"></p>
-				<h1><a target="_blank" href="/blogs/${id}">${title}</a></h1>
+				<h1><a target="_blank" data-bind="text:title,attr:{href:'blogs/'+id()}">${title}</a></h1>
 				<p class="post-time" data-bind="text:date"></p>
 			</header>
 			<p class="post-desc" data-bind="text:blogDesc"></p>
 		</article>
 	</script>
+	<script type="text/html" id="test">
+		<h1>${title}</h1>
+	</script>
 	<!-- Template Area End-->
 	<body id="blog_index">
+		<div id="haha"></div>
 		<div class="pop-cover"></div>
 		<div class="slide-menu" id="slide_menu">
 			<p class="home-button" data-bind="click:backHome()"><i class="fa fa-home"></i>Blog's Home</p>
@@ -50,11 +54,11 @@
 			<p>Powered By NodeJs</p>
 			<p>© Hanson's Blog 2014 GIT @<a href="https://github.com/iamhanson/Hanson" target="_blank">github.com/iamhanson/Hanson</a></p>
 		</footer>
-		<script type="text/javascript" src="script/libs/jquery-1.8.0.min.js"></script>
-		<script type="text/javascript" src="script/libs/jquery.tmpl.js"></script>
-		<script type="text/javascript" src="script/libs/knockout-3.1.0.js"></script>
-		<script type="text/javascript" src="script/libs/knockout.mapping.js"></script>
-		<script type="text/javascript" src="/script/service/model/commonmodel.js"></script>
-		<script type="text/javascript" src="script/service/index.js"></script>
+		<script src="/script/lib/require.js"  data-main="script/framework/config"></script>
+		<script type="text/javascript">
+			require(['/script/framework/ui/index.js'],function(index){
+				index.load();
+			});
+		</script>
 	</body>
 </html>

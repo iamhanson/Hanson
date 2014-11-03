@@ -31,10 +31,10 @@
 		</div>
 	</div>
 </body>
-	<script type="text/javascript" src="/script/libs/jquery-1.8.0.min.js"></script>
-	<script type="text/javascript" src="/script/libs/jquery.tmpl.js"></script>
-	<script type="text/javascript" src="/script/libs/knockout-3.1.0.js"></script>
-	<script type="text/javascript" src="/script/libs/knockout.mapping.js"></script>
-	<script type="text/javascript" src="/script/libs/marked/marked.js"></script>
-	<script type="text/javascript" src="/script/service/create.js"></script>
+	<script src="/script/lib/require.js"  data-main="/script/framework/config"></script>
+	<script type="text/javascript">
+		require(['/script/framework/ui/create.js'],function(create){
+			create.load();
+		});
+	</script>
 </html>

@@ -1,6 +1,14 @@
+body{
+	text-align: left;
+}
+.bloglist-wrap{
+	float: left;
+	margin-left: 60px;
+	width: 90%;
+}
 .bloglist-wrap table{
 	margin-top: 30px;
-	width: 600px;
+	width: 100%;
 	border-left: 1px #ccc solid;
 	border-bottom: 1px #ccc solid;
 }
@@ -29,3 +37,10 @@
 	padding-left: 10px;
 	padding-right: 10px;
 }
+.bloglist-wrap  table a{
+	color: #4285F4;
+	text-decoration: none;
+}
+.bloglist-wrap table a:hover{
+	color: orange;
+};
